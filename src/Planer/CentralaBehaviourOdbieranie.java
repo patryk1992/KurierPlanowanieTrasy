@@ -28,10 +28,10 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 	public int state=0;
 	
 	public void onTick() {
-		System.out.println("Yep");
-		ACLMessage msg = myAgent.receive();
+		System.out.println("Yep2");
+		ACLMessage msg = centrala.receive();
 		System.out.println(msg);
-		if(Dictionary.PACKAGES_REQUEST.equals(msg.getContent())){
+		if(msg != null && Dictionary.PACKAGES_REQUEST.equals(msg.getContent())){
 			System.out.println("Packages size: " + centrala.listPackage.size());
 			if(centrala.listPackage.size() >= 10) {
 				System.out.println("Mamy > 10 paczek");
@@ -55,7 +55,8 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 				msg2.addReceiver(kurierIdId);
 				
 				try {
-					msg2.setContentObject((ArrayList<Integer>)centrala.listPackage.subList(0, 10));
+					// So ugly :< 
+					msg2.setContentObject(new ArrayList<>(centrala.listPackage.subList(0, 10)));
 					myAgent.send(msg2);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

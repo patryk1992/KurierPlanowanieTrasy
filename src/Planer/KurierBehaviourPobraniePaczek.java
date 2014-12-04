@@ -17,15 +17,16 @@ import jade.tools.sniffer.Message;
 
 public class KurierBehaviourPobraniePaczek extends TickerBehaviour {
 	Kurier kurier;
+
 	public KurierBehaviourPobraniePaczek(Agent a, long period) {
 		super(a, period);
-		kurier=(Kurier) a;
+		kurier = (Kurier) a;
 	}
 
-	public int state=0;
-	
+	public int state = 0;
+
 	public void onTick() {
-		if(kurier.listPackage.size()<=0){
+		if (kurier.listPackage.size() <= 0) {
 
 			DFAgentDescription template = new DFAgentDescription();
 			ServiceDescription sd = new ServiceDescription();
@@ -33,10 +34,15 @@ public class KurierBehaviourPobraniePaczek extends TickerBehaviour {
 			template.addServices(sd);
 			DFAgentDescription[] result;
 			AID centralaId = null;
-			
+
 			try {
 				result = DFService.search(myAgent, template);
-				centralaId = result[0].getName();
+				if (result.length > 0) {
+					centralaId = result[0].getName();
+				} else {
+					System.out
+							.println("O kurde.... nie ma zarejestrowanej centrali :<");
+				}
 
 			} catch (FIPAException e) {
 				// TODO Auto-generated catch block
@@ -48,22 +54,23 @@ public class KurierBehaviourPobraniePaczek extends TickerBehaviour {
 			msg2.setContent(Dictionary.PACKAGES_REQUEST);
 			myAgent.send(msg2);
 			System.out.println("czekam na paczki");
-			
-			ACLMessage msg = myAgent.receive();
+
+			ACLMessage msg = kurier.receive();
+			System.out.println("Cos odebralem: " + msg);
 			if (msg != null) {
 				try {
-					ArrayList<Integer> meessage = (ArrayList<Integer>) msg.getContentObject();
+					System.out.println("Jestem w try w kurierBehaviourPobraniePaczek");
+					ArrayList<Integer> meessage = (ArrayList<Integer>) msg
+							.getContentObject();
 					kurier.listPackage.addAll(meessage);
+					System.out.println("Dodalem paczki. Ilosc paczek to: " + kurier.listPackage.size());
 				} catch (UnreadableException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				
-
 			}
 
-			
 		}
 	}
 
