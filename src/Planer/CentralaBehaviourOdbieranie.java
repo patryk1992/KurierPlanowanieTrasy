@@ -56,7 +56,13 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 				
 				try {
 					// So ugly :< 
-					msg2.setContentObject(new ArrayList<>(centrala.listPackage.subList(0, 10)));
+					ArrayList packagesToSend = new ArrayList<>();
+					for(int i = 0; i < 10; i++) {
+						Integer p = centrala.listPackage.get(0);
+						packagesToSend.add(p);
+						centrala.listPackage.remove(p);
+					}
+					msg2.setContentObject(packagesToSend);
 					myAgent.send(msg2);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

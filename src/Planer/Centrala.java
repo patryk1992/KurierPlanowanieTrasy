@@ -17,19 +17,14 @@ public class Centrala extends Agent {
 
 	protected void setup() {
 		System.out.println("Centrala: setup start");
-		p = new Package();
+		initPackages();
+		readArguments();
+		registerAgent();
+		addingBehaviours();
+		System.out.println("Centrala: setup stop");
+	}
 
-		for (int i = 0; i < 36; ++i) {
-			listPackage.add(i);
-		}
-		
-		System.out.println("Centrala: setup packages added");
-		
-		Object[] args = getArguments();
-		if (args != null && args.length > 0) {
-			argumenty = ((String) args[0]);
-		}
-
+	private void registerAgent() {
 		DFAgentDescription template = new DFAgentDescription();
 		template.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
@@ -44,11 +39,27 @@ public class Centrala extends Agent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
 
+	private void addingBehaviours() {
 		System.out.println("Centrala: setup before adding behaviours");
 		addBehaviour(new CentralaBehaviourOdbieranie(this, 1000));
 		//addBehaviour(new CentralaBehaviourWydawanie(this, 1000));
-		System.out.println("Centrala: setup stop");
+	}
+
+	private void initPackages() {
+		p = new Package();
+
+		for (int i = 0; i < 36; ++i) {
+			listPackage.add(i);
+		}
+	}
+
+	private void readArguments() {
+		Object[] args = getArguments();
+		if (args != null && args.length > 0) {
+			argumenty = ((String) args[0]);
+		}
 	}
 
 	protected void takeDown() {
@@ -58,6 +69,6 @@ public class Centrala extends Agent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("¯egnam! " + getAID().getName());
+		System.out.println("Bye! " + getAID().getName());
 	}
 }

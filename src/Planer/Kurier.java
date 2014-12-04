@@ -1,4 +1,5 @@
 package Planer;
+
 import java.util.ArrayList;
 
 import jade.core.AID;
@@ -9,31 +10,33 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 
 public class Kurier extends Agent {
-	String argumenty;
-	ArrayList<Integer> listPackage=new ArrayList<Integer>();
 	
+	String argumenty;
+	ArrayList<Integer> listPackage = new ArrayList<Integer>();
+
 	protected void setup() {
-		Object[] args = getArguments();		
-		if(	args != null &&	args.length >	0	) {
-			argumenty = ((String) args[0]) ;
+		Object[] args = getArguments();
+		if (args != null && args.length > 0) {
+			argumenty = ((String) args[0]);
 		}
 
-		 DFAgentDescription template = new DFAgentDescription();
-		 template.setName(getAID());
-		 ServiceDescription sd = new ServiceDescription();
-		 sd.setType("Kurier");
-		 sd.setName( getLocalName() );
-		 template.addServices(sd);
-		 
-		 try {
+		DFAgentDescription template = new DFAgentDescription();
+		template.setName(getAID());
+		ServiceDescription sd = new ServiceDescription();
+		sd.setType("Kurier");
+		sd.setName(getLocalName());
+		template.addServices(sd);
+
+		try {
 			DFService.register(this, template);
-		 } catch (FIPAException e) {
+		} catch (FIPAException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 addBehaviour( new KurierBehaviourPobraniePaczek(this, 1000));
-		 addBehaviour( new KurierBehaviourRozwozenie(this, 1000));
+		addBehaviour(new KurierBehaviourPobraniePaczek(this, 1000));
+		addBehaviour(new KurierBehaviourRozwozenie(this, 1000));
 	}
+
 	protected void takeDown() {
 		try {
 			DFService.deregister(this);
@@ -41,6 +44,6 @@ public class Kurier extends Agent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("¯egnam! " + getAID().getName());
+		System.out.println("Bye! " + getAID().getName());
 	}
 }
