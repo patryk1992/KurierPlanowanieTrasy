@@ -26,11 +26,11 @@ public class KlientBehaviourWysylanie extends TickerBehaviour {
 		sd.setType("Centrala");
 		template.addServices(sd);
 		DFAgentDescription[] result;
-		AID Centrala = null;
+		AID centralaId = null;
 		
 		try {
 			result = DFService.search(myAgent, template);
-			Centrala = result[0].getName();
+			centralaId = result[0].getName();
 
 		} catch (FIPAException e) {
 			// TODO Auto-generated catch block
@@ -38,7 +38,7 @@ public class KlientBehaviourWysylanie extends TickerBehaviour {
 		}
 
 		ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
-		msg2.addReceiver(Centrala);
+		msg2.addReceiver(centralaId);
 		msg2.setContent("klientmessage");
 		myAgent.send(msg2);
 

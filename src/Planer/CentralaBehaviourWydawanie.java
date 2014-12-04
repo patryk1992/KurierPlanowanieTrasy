@@ -7,9 +7,10 @@ import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
 
 public class CentralaBehaviourWydawanie extends TickerBehaviour {
+	Centrala centrala;
 	public CentralaBehaviourWydawanie(Agent a, long period) {
 		super(a, period);
-		// TODO Auto-generated constructor stub
+		centrala=(Centrala) a;
 	}
 
 	public int state=0;
@@ -17,14 +18,6 @@ public class CentralaBehaviourWydawanie extends TickerBehaviour {
 	public void onTick() {
 		ACLMessage msg = myAgent.receive();
 		if (msg != null) {
-			String meessage=msg.getContent();
-			int wlacz=Integer.parseInt(meessage);
-			state=wlacz;
-			
-			ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
-			msg2.addReceiver(new AID("Woda", AID.ISLOCALNAME));	
-			msg2.setContent(String.valueOf(state));
-			myAgent.send(msg2);
 		}
 		
 

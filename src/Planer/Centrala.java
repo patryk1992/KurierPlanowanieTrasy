@@ -1,4 +1,6 @@
 package Planer;
+import java.util.ArrayList;
+
 import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.DFService;
@@ -10,9 +12,14 @@ public class Centrala extends Agent {
 	String argumenty;
 	private	AID Centrala;
 	Package p;
+	ArrayList<Integer> listPackage=new ArrayList<Integer>();
 	
 	protected void setup() {
 		p=new Package();
+		
+		for(int i=0;i<36;++i){
+			listPackage.add(i);
+		}
 		
 		Object[] args = getArguments();		
 		if(	args != null &&	args.length >	0	) {
@@ -33,6 +40,7 @@ public class Centrala extends Agent {
 			e.printStackTrace();
 		}
 		 addBehaviour( new CentralaBehaviourOdbieranie(this, 1000));
+		 addBehaviour( new CentralaBehaviourWydawanie(this, 1000));
 	}
 	protected void takeDown() {
 		try {
