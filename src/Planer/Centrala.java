@@ -1,6 +1,8 @@
 package Planer;
 
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import jade.core.AID;
 import jade.core.Agent;
@@ -10,10 +12,13 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 
 public class Centrala extends Agent {
+	private static final long serialVersionUID = 1525871364096848556L;
+
 	String argumenty;
-	private AID Centrala;
 	Package p;
 	ArrayList<Integer> listPackage = new ArrayList<Integer>();
+	
+	Queue<AID> kurierzy = new ConcurrentLinkedQueue<AID>();
 
 	protected void setup() {
 		System.out.println("Centrala: setup start");
@@ -36,7 +41,6 @@ public class Centrala extends Agent {
 			DFService.register(this, template);
 			System.out.println("Centrala: setup registered centrala");
 		} catch (FIPAException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -44,7 +48,7 @@ public class Centrala extends Agent {
 	private void addingBehaviours() {
 		System.out.println("Centrala: setup before adding behaviours");
 		addBehaviour(new CentralaBehaviourOdbieranie(this, 1000));
-		//addBehaviour(new CentralaBehaviourWydawanie(this, 1000));
+		addBehaviour(new CentralaBehaviourWydawanie(this, 1000));
 	}
 
 	private void initPackages() {

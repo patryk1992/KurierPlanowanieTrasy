@@ -27,43 +27,43 @@ public class KurierBehaviourPobraniePaczek extends TickerBehaviour {
 
 	public void onTick() {
 		if (kurier.listPackage.size() <= 0) {
-
-			DFAgentDescription template = new DFAgentDescription();
-			ServiceDescription sd = new ServiceDescription();
-			sd.setType("Centrala");
-			template.addServices(sd);
-			DFAgentDescription[] result;
-			AID centralaId = null;
-
-			try {
-				result = DFService.search(myAgent, template);
-				if (result.length > 0) {
-					centralaId = result[0].getName();
-				} else {
-					System.out
-							.println("O kurde.... nie ma zarejestrowanej centrali :<");
+			
+			if(!kurier.isWaitingForPackages) {
+				DFAgentDescription template = new DFAgentDescription();
+				ServiceDescription sd = new ServiceDescription();
+				sd.setType("Centrala");
+				template.addServices(sd);
+				DFAgentDescription[] result;
+				AID centralaId = null;
+	
+				try {
+					result = DFService.search(myAgent, template);
+					if (result.length > 0) {
+						centralaId = result[0].getName();
+					} else {
+						System.out.println("O kurde.... nie ma zarejestrowanej centrali :<");
+					}
+	
+				} catch (FIPAException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-
-			} catch (FIPAException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	
+				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
+				msg2.addReceiver(centralaId);
+				msg2.setContent(Dictionary.PACKAGES_REQUEST);
+				myAgent.send(msg2);
+				System.out.println("czekam na paczki");
+				kurier.isWaitingForPackages = true;
 			}
-
-			ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
-			msg2.addReceiver(centralaId);
-			msg2.setContent(Dictionary.PACKAGES_REQUEST);
-			myAgent.send(msg2);
-			System.out.println("czekam na paczki");
-
+			
 			ACLMessage msg = kurier.receive();
-			System.out.println("Cos odebralem: " + msg);
 			if (msg != null) {
 				try {
-					System.out.println("Jestem w try w kurierBehaviourPobraniePaczek");
-					ArrayList<Integer> meessage = (ArrayList<Integer>) msg
-							.getContentObject();
+					ArrayList<Integer> meessage = (ArrayList<Integer>) msg.getContentObject();
 					kurier.listPackage.addAll(meessage);
 					System.out.println("Dodalem paczki. Ilosc paczek to: " + kurier.listPackage.size());
+					kurier.isWaitingForPackages = false;
 				} catch (UnreadableException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

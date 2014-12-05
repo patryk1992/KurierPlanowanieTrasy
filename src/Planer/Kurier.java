@@ -13,6 +13,7 @@ public class Kurier extends Agent {
 	
 	String argumenty;
 	ArrayList<Integer> listPackage = new ArrayList<Integer>();
+	boolean isWaitingForPackages = false;
 
 	protected void setup() {
 		Object[] args = getArguments();
@@ -30,7 +31,6 @@ public class Kurier extends Agent {
 		try {
 			DFService.register(this, template);
 		} catch (FIPAException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		addBehaviour(new KurierBehaviourPobraniePaczek(this, 1000));
@@ -41,7 +41,6 @@ public class Kurier extends Agent {
 		try {
 			DFService.deregister(this);
 		} catch (FIPAException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("Bye! " + getAID().getName());

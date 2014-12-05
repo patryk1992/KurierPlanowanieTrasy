@@ -19,10 +19,10 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 	public int state=0;
 	
 	public void onTick() {
-		System.out.println("Ilosc paczek u kuriera: " + kurier.listPackage.size());
+		System.out.println("Dostarczono paczke do klienta. Ilosc paczek ktore pozostaly u kuriera: " + kurier.listPackage.size());
 		if(kurier.listPackage.size() > 0) {
 			Integer packa = kurier.listPackage.get(0);
-			
+		
 			// TODO dostarcza 
 			kurier.listPackage.remove(packa);
 		}

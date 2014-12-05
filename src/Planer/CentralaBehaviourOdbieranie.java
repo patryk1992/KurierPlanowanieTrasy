@@ -17,61 +17,49 @@ import jade.util.leap.List;
 
 public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 	
+	private static final long serialVersionUID = 5338053626092303683L;
+	
 	Centrala centrala;
 	
-	public CentralaBehaviourOdbieranie(Agent a, long period) {
-		super(a, period);
-		// TODO Auto-generated constructor stub
-		centrala = (Centrala)a;
+	public CentralaBehaviourOdbieranie(Agent centralaAgent, long period) {
+		super(centralaAgent, period);
+		this.centrala = (Centrala) centralaAgent;
 	}
 
+	// TODO is it necessary?
 	public int state=0;
 	
 	public void onTick() {
-		System.out.println("Yep2");
 		ACLMessage msg = centrala.receive();
-		System.out.println(msg);
-		if(msg != null && Dictionary.PACKAGES_REQUEST.equals(msg.getContent())){
-			System.out.println("Packages size: " + centrala.listPackage.size());
-			if(centrala.listPackage.size() >= 10) {
-				System.out.println("Mamy > 10 paczek");
-				DFAgentDescription template = new DFAgentDescription();
-				ServiceDescription sd = new ServiceDescription();
-				sd.setType("Kurier");
-				template.addServices(sd);
-				DFAgentDescription[] result;
-				AID kurierIdId = null;
-				
-				try {
-					result = DFService.search(myAgent, template);
-					kurierIdId = result[0].getName();
-
-				} catch (FIPAException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
-				msg2.addReceiver(kurierIdId);
-				
-				try {
-					// So ugly :< 
-					ArrayList packagesToSend = new ArrayList<>();
-					for(int i = 0; i < 10; i++) {
-						Integer p = centrala.listPackage.get(0);
-						packagesToSend.add(p);
-						centrala.listPackage.remove(p);
-					}
-					msg2.setContentObject(packagesToSend);
-					myAgent.send(msg2);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Po wyslaniu paczek");
-			}
-
+		if(msg == null) 
+			return;
+		
+		if(Dictionary.PACKAGES_REQUEST.equals(msg.getContent())){
+			System.out.println("*Packages Request. Packages size: " + centrala.listPackage.size());
+			centrala.kurierzy.add(msg.getSender());
+		} else if(Dictionary.PACKAGES_NEW.equals(msg.getContent())) {
+			System.out.println("Klient przyniosl paczke do centrali");
+			centrala.listPackage.add(new Integer(5));
 		}
+	}
+
+	private AID getKurier() {
+		DFAgentDescription template = new DFAgentDescription();
+		ServiceDescription sd = new ServiceDescription();
+		sd.setType("Kurier");
+		template.addServices(sd);
+		DFAgentDescription[] result;
+		AID kurierIdId = null;
+		
+		try {
+			result = DFService.search(myAgent, template);
+			kurierIdId = result[0].getName();
+
+		} catch (FIPAException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return kurierIdId;
 	}
 
 }
