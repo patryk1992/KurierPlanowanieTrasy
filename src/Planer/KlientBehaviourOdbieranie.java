@@ -2,11 +2,12 @@ package Planer;
 
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
 
 public class KlientBehaviourOdbieranie extends TickerBehaviour {
+	private static final long serialVersionUID = -485427374982996959L;
+
 	public KlientBehaviourOdbieranie(Agent a, long period) {
 		super(a, period);
 		// TODO Auto-generated constructor stub

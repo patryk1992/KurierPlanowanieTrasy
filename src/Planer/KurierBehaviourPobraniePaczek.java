@@ -1,21 +1,20 @@
 package Planer;
 
-import java.util.ArrayList;
-
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
-import jade.domain.ams;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
-import jade.tools.sniffer.Message;
+
+import java.util.ArrayList;
 
 public class KurierBehaviourPobraniePaczek extends TickerBehaviour {
+	private static final long serialVersionUID = 3254059910956648855L;
+	
 	Kurier kurier;
 
 	public KurierBehaviourPobraniePaczek(Agent a, long period) {
@@ -60,7 +59,7 @@ public class KurierBehaviourPobraniePaczek extends TickerBehaviour {
 			ACLMessage msg = kurier.receive();
 			if (msg != null) {
 				try {
-					ArrayList<Integer> meessage = (ArrayList<Integer>) msg.getContentObject();
+					ArrayList<Integer> meessage = ((ArrayList<Integer>) msg.getContentObject());
 					kurier.listPackage.addAll(meessage);
 					System.out.println("Dodalem paczki. Ilosc paczek to: " + kurier.listPackage.size());
 					kurier.isWaitingForPackages = false;

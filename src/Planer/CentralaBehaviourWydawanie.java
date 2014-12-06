@@ -13,6 +13,7 @@ public class CentralaBehaviourWydawanie extends TickerBehaviour {
 	
 	Centrala centrala;
 	private int amountOfPackages = 10;
+	
 	public CentralaBehaviourWydawanie(Agent a, long period) {
 		super(a, period);
 		centrala=(Centrala) a;
@@ -29,22 +30,21 @@ public class CentralaBehaviourWydawanie extends TickerBehaviour {
 			AID aktualnyKurier = centrala.kurierzy.poll();
 			ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 			msg2.addReceiver(aktualnyKurier);
-			
+
+			// So ugly :< 
+			ArrayList<Integer> packagesToSend = new ArrayList<>();
+			for(int i = 0; i < 10; i++) {
+				Integer p = centrala.listPackage.get(0);
+				packagesToSend.add(p);
+				centrala.listPackage.remove(p);
+			}
 			try {
-				// So ugly :< 
-				ArrayList<Integer> packagesToSend = new ArrayList<>();
-				for(int i = 0; i < 10; i++) {
-					Integer p = centrala.listPackage.get(0);
-					packagesToSend.add(p);
-					centrala.listPackage.remove(p);
-				}
 				msg2.setContentObject(packagesToSend);
 				myAgent.send(msg2);
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("O kurcze, problem z wysylaniem");
 			}
 			System.out.println("Po wyslaniu paczek");			
-			// TODO wysylanie do pierwszego elementu z kolejku kurierow
 		} else {
 			System.out.println("Nie ma kurierow oczekujacych na paczki lub brak wystarczajacej ilosci paczek, wiec nie wysylam paczek");
 		}

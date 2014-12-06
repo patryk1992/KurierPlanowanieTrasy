@@ -1,10 +1,5 @@
 package Planer;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
@@ -13,7 +8,6 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
-import jade.util.leap.List;
 
 public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 	
@@ -43,6 +37,8 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 		}
 	}
 
+	// TODO is it still necessary?
+	@SuppressWarnings("unused")
 	private AID getKurier() {
 		DFAgentDescription template = new DFAgentDescription();
 		ServiceDescription sd = new ServiceDescription();
@@ -54,9 +50,7 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 		try {
 			result = DFService.search(myAgent, template);
 			kurierIdId = result[0].getName();
-
 		} catch (FIPAException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return kurierIdId;

@@ -1,23 +1,18 @@
 package Planer;
 
-import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
 
 public class Klient extends Agent {
+	private static final long serialVersionUID = -4498367388709885619L;
+
 	String argumenty;
-	private AID Centrala;
-	Package p;
 
 	protected void setup() {
-		p = new Package();
-
 		readArguments();
-
-		registerAgent();
+//		registerAgent();
+		DFServiceUtil.registerAgent(this, "Kurier");
 		addBehaviours();
 	}
 
@@ -29,24 +24,23 @@ public class Klient extends Agent {
 	}
 
 	private void addBehaviours() {
-		addBehaviour(new KlientBehaviourWysylanie(this, 10000, p));
+		addBehaviour(new KlientBehaviourWysylanie(this, 10000));
 	}
 
-	private void registerAgent() {
-		DFAgentDescription template = new DFAgentDescription();
-		template.setName(getAID());
-		ServiceDescription sd = new ServiceDescription();
-		sd.setType("Klient");
-		sd.setName(getLocalName());
-		template.addServices(sd);
-
-		try {
-			DFService.register(this, template);
-		} catch (FIPAException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	private void registerAgent() {
+//		DFAgentDescription template = new DFAgentDescription();
+//		template.setName(getAID());
+//		ServiceDescription sd = new ServiceDescription();
+//		sd.setType("Klient");
+//		sd.setName(getLocalName());
+//		template.addServices(sd);
+//
+//		try {
+//			DFService.register(this, template);
+//		} catch (FIPAException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	protected void takeDown() {
 		try {

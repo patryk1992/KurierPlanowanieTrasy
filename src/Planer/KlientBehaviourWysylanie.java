@@ -2,7 +2,6 @@ package Planer;
 
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -11,12 +10,12 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 
 public class KlientBehaviourWysylanie extends TickerBehaviour {
-	Package p;
+	private static final long serialVersionUID = -5218160089894174649L;
+
 	Klient klient;
 
-	public KlientBehaviourWysylanie(Agent a, long period, Package p) {
+	public KlientBehaviourWysylanie(Agent a, long period) {
 		super(a, period);
-		this.p = p;
 		klient = (Klient) a;	
 	}
 

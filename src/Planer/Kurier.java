@@ -1,15 +1,14 @@
 package Planer;
 
-import java.util.ArrayList;
-
-import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
-import jade.domain.FIPAAgentManagement.DFAgentDescription;
-import jade.domain.FIPAAgentManagement.ServiceDescription;
+
+import java.util.ArrayList;
 
 public class Kurier extends Agent {
+	
+	private static final long serialVersionUID = -920146597594735871L;
 	
 	String argumenty;
 	ArrayList<Integer> listPackage = new ArrayList<Integer>();
@@ -21,18 +20,7 @@ public class Kurier extends Agent {
 			argumenty = ((String) args[0]);
 		}
 
-		DFAgentDescription template = new DFAgentDescription();
-		template.setName(getAID());
-		ServiceDescription sd = new ServiceDescription();
-		sd.setType("Kurier");
-		sd.setName(getLocalName());
-		template.addServices(sd);
-
-		try {
-			DFService.register(this, template);
-		} catch (FIPAException e) {
-			e.printStackTrace();
-		}
+		DFServiceUtil.registerAgent(this, "Kurier");
 		addBehaviour(new KurierBehaviourPobraniePaczek(this, 1000));
 		addBehaviour(new KurierBehaviourRozwozenie(this, 1000));
 	}

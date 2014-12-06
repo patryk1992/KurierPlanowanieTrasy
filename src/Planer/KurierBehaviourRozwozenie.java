@@ -1,12 +1,10 @@
 package Planer;
 
-import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.TickerBehaviour;
-import jade.lang.acl.ACLMessage;
 
 public class KurierBehaviourRozwozenie extends TickerBehaviour {
+	private static final long serialVersionUID = -7893170015543204040L;
 	
 	Kurier kurier;
 	
