@@ -23,4 +23,14 @@ public class DFServiceUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void deRegister(Agent agent) {
+		try {
+			DFService.deregister(agent);
+		} catch (FIPAException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Bye! " + agent.getAID().getName());
+
+	}
 }

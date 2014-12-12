@@ -1,8 +1,6 @@
 package Planer;
 
 import jade.core.Agent;
-import jade.domain.DFService;
-import jade.domain.FIPAException;
 
 import java.util.ArrayList;
 
@@ -26,11 +24,6 @@ public class Kurier extends Agent {
 	}
 
 	protected void takeDown() {
-		try {
-			DFService.deregister(this);
-		} catch (FIPAException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Bye! " + getAID().getName());
+		DFServiceUtil.deRegister(this);
 	}
 }
