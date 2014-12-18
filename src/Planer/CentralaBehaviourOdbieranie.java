@@ -34,6 +34,9 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 		} else if(Dictionary.PACKAGES_NEW.equals(msg.getContent())) {
 			System.out.println("Klient przyniosl paczke do centrali");
 			centrala.listPackage.add(new Integer(5));
+		}else if(msg.getContent().contains(Dictionary.PACKAGES_KLIENT_REGISTER)) {
+			System.out.println("Klient sie rejestruje");
+			
 		}
 	}
 
