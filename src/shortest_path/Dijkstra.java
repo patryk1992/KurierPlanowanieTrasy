@@ -1,4 +1,6 @@
-package shortest_path;
+package src.shortest_path;
+
+
 import java.util.PriorityQueue;
 import java.util.List;
 import java.util.ArrayList;

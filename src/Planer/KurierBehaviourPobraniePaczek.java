@@ -22,7 +22,7 @@ public class KurierBehaviourPobraniePaczek extends TickerBehaviour {
 		kurier = (Kurier) a;
 	}
 
-	public int state = 0;
+	
 
 	public void onTick() {
 		if (kurier.listPackage.size() <= 0) {

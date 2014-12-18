@@ -6,6 +6,7 @@ public class Klient extends Agent {
 	private static final long serialVersionUID = -4498367388709885619L;
 
 	String argumenty;
+	String adress;
 
 	protected void setup() {
 		readArguments();
@@ -22,7 +23,7 @@ public class Klient extends Agent {
 	}
 
 	private void addBehaviours() {
-		addBehaviour(new KlientBehaviourWysylanie(this, 10000));
+		addBehaviour(new KlientBehaviourWysylanie(this, 1000));
 	}
 
 
