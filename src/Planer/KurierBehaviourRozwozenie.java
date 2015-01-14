@@ -10,6 +10,10 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 
 import java.io.IOException;
+import java.util.List;
+
+import shortest_path.Dijkstra;
+import shortest_path.Vertex;
 
 public class KurierBehaviourRozwozenie extends TickerBehaviour {
 	private static final long serialVersionUID = -7893170015543204040L;
@@ -28,18 +32,19 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 		System.out.println("Dostarczono paczke do klienta. Ilosc paczek ktore pozostaly u kuriera: " + kurier.listPackage.size());
 		if(kurier.listPackage.size() > 0) {
 			//tutaj pisz
-//			
-//			shortest_path.Dijkstra dj = new Dijkstra();
-//			dj.computePaths(dj.POZ);
-//			for(int i=0; i<kurier.listPackage.size();i++)
-//			{
-//				Paczka packa = kurier.listPackage.get(i);
-//				dj.getShortestPathTo(packa.ge)
-//				
-//				
-//			}
-//			
-			Paczka packa = kurier.listPackage.get(0);
+			
+			shortest_path.Dijkstra dj = new Dijkstra();
+			Paczka shortestPack = kurier.listPackage.get(0);
+			List<Vertex> shortes = dj.compute(Dijkstra.POZ, kurier.listPackage.get(0).getAdresNadawcy());
+			for(int i=1; i<kurier.listPackage.size();i++)
+			{
+				List<Vertex> current = dj.compute(Dijkstra.POZ, kurier.listPackage.get(i).getAdresNadawcy());
+				if(current.size() < shortes.size()) {
+					shortestPack = kurier.listPackage.get(i);
+					shortes = current;
+				}
+			}
+			
 			System.out.println("kurier wysylanie tick onStart");
 			DFAgentDescription template = new DFAgentDescription();
 			ServiceDescription sd = new ServiceDescription();
@@ -57,18 +62,14 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 				e.printStackTrace();
 			}			
 			for(int i=0;i<result.length;i++){
-				if(result[i].getName().equals(packa.getAIDKlienta()))
+				if(result[i].getName().equals(shortestPack.getAIDKlienta()))
 					centralaId = result[i].getName();
 			}
-			
-		
-			
-			
 			
 			ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 			msg2.addReceiver(centralaId);
 			try {
-				msg2.setContentObject(packa);
+				msg2.setContentObject(shortestPack);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -76,7 +77,7 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 			msg2.setOntology(Dictionary.DELIVER_PACK);
 			myAgent.send(msg2);
 			// TODO dostarcza 
-			kurier.listPackage.remove(packa);
+			kurier.listPackage.remove(shortestPack);
 		}
 	}
 

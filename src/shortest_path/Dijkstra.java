@@ -55,7 +55,7 @@ public class Dijkstra {
 				new Edge(WAW, 293), new Edge(GDA, 603) };
 	}
 	
-	private List<Vertex> compute(Vertex source, Vertex target) {
+	public List<Vertex> compute(Vertex source, Vertex target) {
 		synchronized(SZC) {
 			computePaths(source);
 			return getShortestPathTo(target);
