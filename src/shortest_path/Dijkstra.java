@@ -1,4 +1,4 @@
-package src.shortest_path;
+package shortest_path;
 
 
 import java.util.PriorityQueue;
@@ -148,5 +148,6 @@ public class Dijkstra
         System.out.println("Distance to " + WAW + ": " + WAW.minDistance);
         List<Vertex> path = getShortestPathTo(WAW);
         System.out.println("Path: " + path);
-    }
+    }  
+    
 }

@@ -1,5 +1,6 @@
 package Planer;
 
+import shortest_path.Cities;
 import jade.core.Agent;
 //TODO
 //trzeba dodaæ zablokowanie wysy³¹nia, tak aby najpierw sie rejestrowa³ a potem wysy³a³
@@ -8,8 +9,21 @@ public class Klient extends Agent {
 
 	String argumenty;
 	String adress;
+	int nrAgenta;
 
 	protected void setup() {
+
+		String []tmp=getAID().getName().split("_");
+		if(tmp.length>1){
+		  this.nrAgenta=Integer.parseInt(tmp[1].split("@")[0]);
+		}
+		else{
+		  this.nrAgenta=0;
+		}
+		this.adress=Cities.cities[nrAgenta];
+				
+		System.out.println("Numer klienta to: "+this.nrAgenta+", a jego miasto to: "+this.adress);
+				
 		readArguments();
 //		registerAgent();
 		DFServiceUtil.registerAgent(this, "Klient");
