@@ -39,6 +39,7 @@ public class CentralaBehaviourWydawanie extends TickerBehaviour {
 				centrala.listPackage.remove(p);
 			}
 			try {
+				msg2.setOntology(Dictionary.RECV_PACK);
 				msg2.setContentObject(packagesToSend);
 				myAgent.send(msg2);
 			} catch (IOException e) {

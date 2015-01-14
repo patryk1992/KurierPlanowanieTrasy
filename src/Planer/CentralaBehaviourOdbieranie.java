@@ -27,41 +27,54 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 	
 	public void onTick() {
 		
-		MessageTemplate mt2= MessageTemplate.MatchOntology(Dictionary.PACKAGES_KLIENT_REGISTER);
+		MessageTemplate  mt2= MessageTemplate.MatchOntology(Dictionary.PACKAGES_REQUEST);
 		ACLMessage msg2 = centrala.receive(mt2);
-		if(msg2 == null) 
-			return;
+		if(msg2 != null) 
+		{
 		try {
 			System.out.println(msg2.getContentObject().toString());
 		} catch (UnreadableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
 		
-		mt2= MessageTemplate.MatchOntology(Dictionary.PACKAGES_REQUEST);
+		mt2= MessageTemplate.MatchOntology(Dictionary.PACKAGES_KLIENT_REGISTER);
 		msg2 = centrala.receive(mt2);
-		if(msg2 == null) 
-			return;
+		if(msg2 != null) 
+		{
 		try {
 			System.out.println(msg2.getContentObject().toString());
 		} catch (UnreadableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		}
+
 		
-		
-		
-		
-		
-		MessageTemplate mt= MessageTemplate.MatchOntology(Dictionary.PACKAGES_NEW);
-		ACLMessage msg = centrala.receive(mt);
-		if(msg == null) 
-			return;
+		mt2= MessageTemplate.MatchOntology(Dictionary.RECV_PACK);
+		msg2 = centrala.receive(mt2);
+		if(msg2 != null) 
+		{	
 		try {
-			centrala.listPackage.add((Paczka) msg.getContentObject());
+			System.out.println(msg2.getContentObject().toString());
 		} catch (UnreadableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		}
+		
+		
+		mt2= MessageTemplate.MatchOntology(Dictionary.PACKAGES_NEW);
+		msg2 = centrala.receive(mt2);
+		if(msg2 != null) 
+		{
+		try {
+			centrala.listPackage.add((Paczka) msg2.getContentObject());
+		} catch (UnreadableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		}
 //		if(Dictionary.PACKAGES_REQUEST.equals(msg.getContent())){
 //			System.out.println("*Packages Request. Packages size: " + centrala.listPackage.size());
