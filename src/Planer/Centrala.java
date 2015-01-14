@@ -13,7 +13,8 @@ public class Centrala extends Agent {
 	String argumenty;
 	ArrayList<Paczka> listPackage = new ArrayList<Paczka>();
 	Queue<AID> kurierzy = new ConcurrentLinkedQueue<AID>();
-
+	Queue<AID> klienci = new ConcurrentLinkedQueue<AID>();
+	
 	protected void setup() {
 		System.out.println("Centrala: setup start");
 //		initPackages();

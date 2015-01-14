@@ -26,6 +26,33 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 	public int state=0;
 	
 	public void onTick() {
+		
+		MessageTemplate mt2= MessageTemplate.MatchOntology(Dictionary.PACKAGES_KLIENT_REGISTER);
+		ACLMessage msg2 = centrala.receive(mt2);
+		if(msg2 == null) 
+			return;
+		try {
+			System.out.println(msg2.getContentObject().toString());
+		} catch (UnreadableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		mt2= MessageTemplate.MatchOntology(Dictionary.PACKAGES_REQUEST);
+		msg2 = centrala.receive(mt2);
+		if(msg2 == null) 
+			return;
+		try {
+			System.out.println(msg2.getContentObject().toString());
+		} catch (UnreadableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
 		MessageTemplate mt= MessageTemplate.MatchOntology(Dictionary.PACKAGES_NEW);
 		ACLMessage msg = centrala.receive(mt);
 		if(msg == null) 

@@ -9,7 +9,7 @@ public class Kurier extends Agent {
 	private static final long serialVersionUID = -920146597594735871L;
 	
 	String argumenty;
-	ArrayList<Integer> listPackage = new ArrayList<Integer>();
+	ArrayList<Paczka> listPackage = new ArrayList<Paczka>();
 	boolean isWaitingForPackages = false;
 
 	protected void setup() {
