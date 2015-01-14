@@ -1,7 +1,13 @@
 package Planer;
 
-public class Package {
+import jade.util.leap.Serializable;
+
+public class Package implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String adresNadawcy;
 	private String adresOdbiorcy;

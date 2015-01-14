@@ -1,7 +1,9 @@
 package Planer;
 
+import java.io.IOException;
 import java.util.UUID;
 
+import shortest_path.Cities;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
@@ -39,13 +41,19 @@ public class KlientBehaviourWysylanie extends TickerBehaviour {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	//	Package packToSend =  new Package()
+		Package packToSend =  new Package(UUID.randomUUID().toString(),klient.adress,Cities.getRandomCity());
+		
 
 		ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 		msg2.addReceiver(centralaId);
-		msg2.setContent(Dictionary.PACKAGES_NEW);
-		// dac wysylanie paczki
+		try {
+			msg2.setContentObject(packToSend);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		myAgent.send(msg2);
+		System.out.println(packToSend.getAdresNadawcy() + " " + packToSend.getId() + " " + packToSend.getAdresodbiorcy());
 		System.out.println("Klient wysylanie tick onStop"); 
 	}
 
