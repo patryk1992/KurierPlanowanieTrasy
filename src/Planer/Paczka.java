@@ -2,7 +2,7 @@ package Planer;
 
 import jade.util.leap.Serializable;
 
-public class Package implements Serializable {
+public class Paczka implements Serializable {
 	
 	/**
 	 * 
@@ -12,7 +12,7 @@ public class Package implements Serializable {
 	private String adresNadawcy;
 	private String adresOdbiorcy;
 	
-	public Package(String id, String adresNadawcy, String adresodbiorcy) {
+	public Paczka(String id, String adresNadawcy, String adresodbiorcy) {
 		super();
 		this.setId(id);
 		this.setAdresNadawcy(adresNadawcy);

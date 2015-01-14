@@ -11,12 +11,12 @@ public class Centrala extends Agent {
 	private static final long serialVersionUID = 1525871364096848556L;
 
 	String argumenty;
-	ArrayList<Integer> listPackage = new ArrayList<Integer>();
+	ArrayList<Paczka> listPackage = new ArrayList<Paczka>();
 	Queue<AID> kurierzy = new ConcurrentLinkedQueue<AID>();
 
 	protected void setup() {
 		System.out.println("Centrala: setup start");
-		initPackages();
+//		initPackages();
 		readArguments();
 //		registerAgent();
 		DFServiceUtil.registerAgent(this, "Centrala");
@@ -30,11 +30,11 @@ public class Centrala extends Agent {
 		addBehaviour(new CentralaBehaviourWydawanie(this, 1000));
 	}
 
-	private void initPackages() {
-		for (int i = 0; i < 36; ++i) {
-			listPackage.add(i);
-		}
-	}
+//	private void initPackages() {
+//		for (int i = 0; i < 36; ++i) {
+//			listPackage.add(i);
+//		}
+//	}
 
 	private void readArguments() {
 		Object[] args = getArguments();

@@ -8,6 +8,8 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
+import jade.lang.acl.UnreadableException;
 
 public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 	
@@ -24,20 +26,26 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 	public int state=0;
 	
 	public void onTick() {
-		ACLMessage msg = centrala.receive();
+		MessageTemplate mt= MessageTemplate.MatchOntology(Dictionary.PACKAGES_NEW);
+		ACLMessage msg = centrala.receive(mt);
 		if(msg == null) 
 			return;
-		
-		if(Dictionary.PACKAGES_REQUEST.equals(msg.getContent())){
-			System.out.println("*Packages Request. Packages size: " + centrala.listPackage.size());
-			centrala.kurierzy.add(msg.getSender());
-		} else if(Dictionary.PACKAGES_NEW.equals(msg.getContent())) {
-			System.out.println("Klient przyniosl paczke do centrali");
-			centrala.listPackage.add(new Integer(5));
-		}else if(msg.getContent().contains(Dictionary.PACKAGES_KLIENT_REGISTER)) {
-			System.out.println("Klient sie rejestruje");
-			
+		try {
+			centrala.listPackage.add((Paczka) msg.getContentObject());
+		} catch (UnreadableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+//		if(Dictionary.PACKAGES_REQUEST.equals(msg.getContent())){
+//			System.out.println("*Packages Request. Packages size: " + centrala.listPackage.size());
+//			centrala.kurierzy.add(msg.getSender());
+//		} else if(Dictionary.PACKAGES_NEW.equals(msg.getContent())) {
+//			System.out.println("Klient przyniosl paczke do centrali");
+//			centrala.listPackage.add(new Integer(5));
+//		}else if(msg.getContent().contains(Dictionary.PACKAGES_KLIENT_REGISTER)) {
+//			System.out.println("Klient sie rejestruje");
+//			
+//		}
 	}
 
 	// TODO is it still necessary?

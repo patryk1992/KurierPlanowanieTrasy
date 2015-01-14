@@ -41,7 +41,7 @@ public class KlientBehaviourWysylanie extends TickerBehaviour {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Package packToSend =  new Package(UUID.randomUUID().toString(),klient.adress,Cities.getRandomCity());
+		Paczka packToSend =  new Paczka(UUID.randomUUID().toString(),klient.adress,Cities.getRandomCity());
 		
 
 		ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
@@ -52,6 +52,7 @@ public class KlientBehaviourWysylanie extends TickerBehaviour {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		msg2.setOntology(Dictionary.PACKAGES_NEW);
 		myAgent.send(msg2);
 		System.out.println(packToSend.getAdresNadawcy() + " " + packToSend.getId() + " " + packToSend.getAdresodbiorcy());
 		System.out.println("Klient wysylanie tick onStop"); 

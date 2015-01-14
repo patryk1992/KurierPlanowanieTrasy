@@ -32,9 +32,9 @@ public class CentralaBehaviourWydawanie extends TickerBehaviour {
 			msg2.addReceiver(aktualnyKurier);
 
 			// So ugly :< 
-			ArrayList<Integer> packagesToSend = new ArrayList<>();
+			ArrayList<Paczka> packagesToSend = new ArrayList<Paczka>();
 			for(int i = 0; i < 10; i++) {
-				Integer p = centrala.listPackage.get(0);
+				Paczka p = centrala.listPackage.get(0);
 				packagesToSend.add(p);
 				centrala.listPackage.remove(p);
 			}

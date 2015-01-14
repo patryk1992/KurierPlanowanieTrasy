@@ -30,7 +30,7 @@ public class Klient extends Agent {
 		}
 		this.adress=Cities.cities[nrAgenta];
 		System.out.println("Numer klienta to: "+this.nrAgenta+", a jego miasto to: "+this.adress);
-//		addBehaviours();
+		addBehaviours();
 	}
 
 	private void readArguments() {
