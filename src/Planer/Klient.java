@@ -1,7 +1,6 @@
 package Planer;
 
 import jade.core.Agent;
-import shortest_path.Cities;
 import shortest_path.Dijkstra;
 import shortest_path.Vertex;
 //TODO
@@ -10,9 +9,8 @@ public class Klient extends Agent {
 	private static final long serialVersionUID = -4498367388709885619L;
 
 	String argumenty;
-	String adress;
+	Vertex adress;
 	int nrAgenta;
-	Vertex town;
 
 	protected void setup() {
 		readArguments();
@@ -27,8 +25,7 @@ public class Klient extends Agent {
 		  this.nrAgenta=0;
 		}
 
-		town = Dijkstra.array[nrAgenta];
-		this.adress=Cities.cities[nrAgenta];
+		this.adress=Dijkstra.array[nrAgenta];
 		System.out.println("Numer klienta to: "+this.nrAgenta+", a jego miasto to: "+this.adress);
 		addBehaviours();
 	}

@@ -1,16 +1,15 @@
 package Planer;
 
-import java.io.IOException;
-
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
-import jade.core.behaviours.TickerBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
+
+import java.io.IOException;
 
 public class KlientBehaviourRegister extends OneShotBehaviour {
 	private static final long serialVersionUID = -5218160089894174649L;
@@ -19,7 +18,7 @@ public class KlientBehaviourRegister extends OneShotBehaviour {
 
 	public KlientBehaviourRegister(Agent a) {
 		super();
-		klient = (Klient) a;	
+		klient = (Klient) a;
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class KlientBehaviourRegister extends OneShotBehaviour {
 		template.addServices(sd);
 		DFAgentDescription[] result;
 		AID centralaId = null;
-		
+
 		try {
 			result = DFService.search(myAgent, template);
 			centralaId = result[0].getName();
@@ -44,7 +43,7 @@ public class KlientBehaviourRegister extends OneShotBehaviour {
 
 		ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 		msg2.addReceiver(centralaId);
-	//	msg2.setContent(Dictionary.PACKAGES_NEW);
+		// msg2.setContent(Dictionary.PACKAGES_NEW);
 		try {
 			msg2.setContentObject(Dictionary.PACKAGES_KLIENT_REGISTER);
 		} catch (IOException e) {
@@ -53,7 +52,7 @@ public class KlientBehaviourRegister extends OneShotBehaviour {
 		}
 		msg2.setOntology(Dictionary.PACKAGES_KLIENT_REGISTER);
 		myAgent.send(msg2);
-		System.out.println("Klient wysylanie tick onStop"); 
+		System.out.println("Klient wysylanie tick onStop");
 	}
 
 }

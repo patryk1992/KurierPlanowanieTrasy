@@ -12,12 +12,11 @@ public class Paczka implements Serializable {
 	private String id;
 	private String AIDKlienta;
 
-	private String adresNadawcy;
-	private String adresOdbiorcy;
-	private Vertex town;
+	private Vertex adresNadawcy;
+	private Vertex adresOdbiorcy;
 	
 	
-	public Paczka(String id,String AIDKlienta, String adresNadawcy, String adresodbiorcy) {
+	public Paczka(String id,String AIDKlienta, Vertex adresNadawcy, Vertex adresodbiorcy) {
 		super();
 		this.setId(id);
 		this.setAdresNadawcy(adresNadawcy);
@@ -30,16 +29,16 @@ public class Paczka implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getAdresodbiorcy() {
+	public Vertex getAdresodbiorcy() {
 		return adresOdbiorcy;
 	}
-	public void setAdresodbiorcy(String adresodbiorcy) {
+	public void setAdresodbiorcy(Vertex adresodbiorcy) {
 		this.adresOdbiorcy = adresodbiorcy;
 	}
-	public String getAdresNadawcy() {
+	public Vertex getAdresNadawcy() {
 		return adresNadawcy;
 	}
-	public void setAdresNadawcy(String adresNadawcy) {
+	public void setAdresNadawcy(Vertex adresNadawcy) {
 		this.adresNadawcy = adresNadawcy;
 	}
 	

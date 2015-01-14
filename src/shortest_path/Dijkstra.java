@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Random;
 
 public class Dijkstra {
 	
@@ -17,6 +18,11 @@ public class Dijkstra {
 	public static Vertex KRK = new Vertex("KRK");
 	
 	public static Vertex[] array = new Vertex[] {SZC, WRO, POZ, GDA, WAW, LUB, KRK};
+	
+	public static Vertex getRandomCity() {
+		Random rand = new Random();
+		return array[rand.nextInt(7)];
+	}
 
 	static {
 		// set the edges and weight

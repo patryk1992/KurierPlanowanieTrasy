@@ -1,9 +1,5 @@
 package Planer;
 
-import java.io.IOException;
-import java.util.UUID;
-
-import shortest_path.Cities;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
@@ -12,6 +8,11 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
+
+import java.io.IOException;
+import java.util.UUID;
+
+import shortest_path.Dijkstra;
 
 public class KlientBehaviourWysylanie extends TickerBehaviour {
 	private static final long serialVersionUID = -5218160089894174649L;
@@ -41,7 +42,7 @@ public class KlientBehaviourWysylanie extends TickerBehaviour {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Paczka packToSend =  new Paczka(UUID.randomUUID().toString(),klient.getAID().getName(),klient.adress,Cities.getRandomCity());
+		Paczka packToSend =  new Paczka(UUID.randomUUID().toString(),klient.getAID().getName(),klient.adress,Dijkstra.getRandomCity());
 		
 
 		ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
