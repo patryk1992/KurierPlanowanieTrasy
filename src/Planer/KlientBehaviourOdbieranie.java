@@ -1,9 +1,15 @@
 package Planer;
 
+import java.security.spec.MGF1ParameterSpec;
+
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
+
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
+import jade.lang.acl.UnreadableException;
 
 public class KlientBehaviourOdbieranie extends TickerBehaviour {
 	private static final long serialVersionUID = -485427374982996959L;
@@ -16,16 +22,17 @@ public class KlientBehaviourOdbieranie extends TickerBehaviour {
 	public int state=0;
 	
 	public void onTick() {
-		ACLMessage msg = myAgent.receive();
+		MessageTemplate  mt2= MessageTemplate.MatchOntology(Dictionary.DELIVER_PACK);
+		ACLMessage msg = myAgent.receive(mt2);
 		if (msg != null) {
-			String meessage=msg.getContent();
-			int wlacz=Integer.parseInt(meessage);
-			state=wlacz;
+			try {
+				Paczka pack=(Paczka) msg.getContentObject();
+				System.out.println("Klient odebrano paczkê"+ pack.toString());
+			} catch (UnreadableException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-			ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
-			msg2.addReceiver(new AID("Woda", AID.ISLOCALNAME));	
-			msg2.setContent(String.valueOf(state));
-			myAgent.send(msg2);
 		}
 		
 

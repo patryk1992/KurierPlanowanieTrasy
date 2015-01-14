@@ -43,7 +43,7 @@ public class Klient extends Agent {
 	private void addBehaviours() {
 		addBehaviour(new KlientBehaviourRegister(this));
 		addBehaviour(new KlientBehaviourWysylanie(this, 1000));
-		
+		addBehaviour(new KlientBehaviourOdbieranie(this, 1000));
 	}
 
 

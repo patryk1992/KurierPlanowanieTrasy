@@ -9,6 +9,7 @@ public class Paczka implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
+	
 	private String adresNadawcy;
 	private String adresOdbiorcy;
 	
@@ -37,7 +38,11 @@ public class Paczka implements Serializable {
 		this.adresNadawcy = adresNadawcy;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Paczka [id=" + id + ", adresNadawcy=" + adresNadawcy
+				+ ", adresOdbiorcy=" + adresOdbiorcy + "]";
+	}
 
 	
 }
