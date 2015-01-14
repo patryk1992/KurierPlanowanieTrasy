@@ -8,15 +8,15 @@ import java.util.PriorityQueue;
 public class Dijkstra {
 	
 	// mark all the vertices
-	public static Vertex SZC = new Vertex("SZC");
-	public static Vertex WRO = new Vertex("WRO");
-	public static Vertex POZ = new Vertex("POZ");
-	public static Vertex GDA = new Vertex("GDA");
-	public static Vertex WAW = new Vertex("WAW");
-	public static Vertex LUB = new Vertex("LUB");
-	public static Vertex KRK = new Vertex("KRK");
+	public Vertex SZC = new Vertex("SZC");
+	public Vertex WRO = new Vertex("WRO");
+	public Vertex POZ = new Vertex("POZ");
+	public Vertex GDA = new Vertex("GDA");
+	public Vertex WAW = new Vertex("WAW");
+	public Vertex LUB = new Vertex("LUB");
+	public Vertex KRK = new Vertex("KRK");
 
-	static {
+	public Dijkstra(){
 		// set the edges and weight
 		SZC.adjacencies = new Edge[] { new Edge(WRO, 364), new Edge(POZ, 235),
 				new Edge(GDA, 366), new Edge(WAW, 565), new Edge(LUB, 690),
