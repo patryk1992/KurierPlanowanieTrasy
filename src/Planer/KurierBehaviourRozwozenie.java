@@ -32,13 +32,13 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 		System.out.println("Dostarczono paczke do klienta. Ilosc paczek ktore pozostaly u kuriera: " + kurier.listPackage.size());
 		if(kurier.listPackage.size() > 0) {
 			//tutaj pisz
-			
+			Vertex old = Dijkstra.POZ;
 			shortest_path.Dijkstra dj = new Dijkstra();
 			Paczka shortestPack = kurier.listPackage.get(0);
 			List<Vertex> shortes = dj.compute(Dijkstra.POZ, kurier.listPackage.get(0).getAdresodbiorcy());
 			for(int i=1; i<kurier.listPackage.size();i++)
 			{
-				List<Vertex> current = dj.compute(Dijkstra.POZ, kurier.listPackage.get(i).getAdresodbiorcy());
+				List<Vertex> current = dj.compute(old, kurier.listPackage.get(i).getAdresodbiorcy());
 				if(current.size() < shortes.size()) {
 					shortestPack = kurier.listPackage.get(i);
 					shortes = current;
@@ -77,6 +77,7 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 			msg2.setOntology(Dictionary.DELIVER_PACK);
 			myAgent.send(msg2);
 			// TODO dostarcza 
+			old =  shortestPack.getAdresodbiorcy();
 			kurier.listPackage.remove(shortestPack);
 		}
 	}
