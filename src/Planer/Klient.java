@@ -13,6 +13,14 @@ public class Klient extends Agent {
 
 	protected void setup() {
 
+		
+				
+		
+				
+		readArguments();
+//		registerAgent();
+		DFServiceUtil.registerAgent(this, "Klient");
+		
 		String []tmp=getAID().getName().split("_");
 		if(tmp.length>1){
 		  this.nrAgenta=Integer.parseInt(tmp[1].split("@")[0]);
@@ -21,13 +29,8 @@ public class Klient extends Agent {
 		  this.nrAgenta=0;
 		}
 		this.adress=Cities.cities[nrAgenta];
-				
 		System.out.println("Numer klienta to: "+this.nrAgenta+", a jego miasto to: "+this.adress);
-				
-		readArguments();
-//		registerAgent();
-		DFServiceUtil.registerAgent(this, "Klient");
-		addBehaviours();
+//		addBehaviours();
 	}
 
 	private void readArguments() {
