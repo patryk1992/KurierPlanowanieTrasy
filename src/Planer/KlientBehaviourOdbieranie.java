@@ -22,7 +22,7 @@ public class KlientBehaviourOdbieranie extends TickerBehaviour {
 		if (msg != null) {
 			try {
 				Paczka pack=(Paczka) msg.getContentObject();
-				System.out.println("Klient odebrano paczkê"+ pack.toString());
+				System.out.println("Klient odebrano paczkê"+ pack.toString() + " : " + ((Klient)super.myAgent).adress);
 			} catch (UnreadableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

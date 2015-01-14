@@ -35,10 +35,10 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 			
 			shortest_path.Dijkstra dj = new Dijkstra();
 			Paczka shortestPack = kurier.listPackage.get(0);
-			List<Vertex> shortes = dj.compute(Dijkstra.POZ, kurier.listPackage.get(0).getAdresNadawcy());
+			List<Vertex> shortes = dj.compute(Dijkstra.POZ, kurier.listPackage.get(0).getAdresodbiorcy());
 			for(int i=1; i<kurier.listPackage.size();i++)
 			{
-				List<Vertex> current = dj.compute(Dijkstra.POZ, kurier.listPackage.get(i).getAdresNadawcy());
+				List<Vertex> current = dj.compute(Dijkstra.POZ, kurier.listPackage.get(i).getAdresodbiorcy());
 				if(current.size() < shortes.size()) {
 					shortestPack = kurier.listPackage.get(i);
 					shortes = current;
