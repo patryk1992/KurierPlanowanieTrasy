@@ -1,5 +1,7 @@
 package Planer;
 
+import java.io.IOException;
+
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
@@ -43,7 +45,13 @@ public class KlientBehaviourRegister extends OneShotBehaviour {
 		ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 		msg2.addReceiver(centralaId);
 	//	msg2.setContent(Dictionary.PACKAGES_NEW);
-		msg2.setContent(Dictionary.PACKAGES_KLIENT_REGISTER+klient.adress);
+		try {
+			msg2.setContentObject(Dictionary.PACKAGES_KLIENT_REGISTER);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		msg2.setOntology(Dictionary.PACKAGES_KLIENT_REGISTER);
 		myAgent.send(msg2);
 		System.out.println("Klient wysylanie tick onStop"); 
 	}
