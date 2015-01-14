@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 import shortest_path.Cities;
+import shortest_path.Dijkstra;
+import shortest_path.Vertex;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
@@ -29,6 +31,18 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 	public void onTick() {
 		System.out.println("Dostarczono paczke do klienta. Ilosc paczek ktore pozostaly u kuriera: " + kurier.listPackage.size());
 		if(kurier.listPackage.size() > 0) {
+			//tutaj pisz
+			Vertex POZ = new Vertex("POZ");
+			
+			shortest_path.Dijkstra dj = new Dijkstra();
+			dj.computePaths(POZ);
+			for(int i=0; i<kurier.listPackage.size();i++)
+			{
+				
+				
+				
+			}
+			
 			Paczka packa = kurier.listPackage.get(0);
 			System.out.println("kurier wysylanie tick onStart");
 			DFAgentDescription template = new DFAgentDescription();
