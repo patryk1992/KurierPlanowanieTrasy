@@ -1,6 +1,8 @@
 package shortest_path;
 
-public class Vertex implements Comparable<Vertex> {
+import java.io.Serializable;
+
+public class Vertex implements Comparable<Vertex>, Serializable {
 	public final String name;
 	public Edge[] adjacencies;
 	public double minDistance = Double.POSITIVE_INFINITY;
