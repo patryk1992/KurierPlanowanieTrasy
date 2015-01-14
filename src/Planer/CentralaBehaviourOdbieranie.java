@@ -32,6 +32,7 @@ public class CentralaBehaviourOdbieranie extends TickerBehaviour {
 		if(msg2 != null) 
 		{
 		try {
+			centrala.kurierzy.add(msg2.getSender());
 			System.out.println(msg2.getContentObject().toString());
 		} catch (UnreadableException e) {
 			// TODO Auto-generated catch block
