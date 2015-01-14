@@ -41,7 +41,6 @@ public class Dijkstra
     while (!vertexQueue.isEmpty()) {
         Vertex u = vertexQueue.poll();
 
-            // Visit each edge exiting u
         System.out.println(u.adjacencies);
             for (Edge e : u.adjacencies)
             {
