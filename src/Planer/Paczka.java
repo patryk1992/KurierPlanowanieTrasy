@@ -9,15 +9,18 @@ public class Paczka implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
-	
+	private String AIDKlienta;
+
 	private String adresNadawcy;
 	private String adresOdbiorcy;
 	
-	public Paczka(String id, String adresNadawcy, String adresodbiorcy) {
+	
+	public Paczka(String id,String AIDKlienta, String adresNadawcy, String adresodbiorcy) {
 		super();
 		this.setId(id);
 		this.setAdresNadawcy(adresNadawcy);
 		this.setAdresodbiorcy(adresodbiorcy);
+		this.AIDKlienta=AIDKlienta;
 	}
 	public String getId() {
 		return id;
@@ -40,9 +43,16 @@ public class Paczka implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Paczka [id=" + id + ", adresNadawcy=" + adresNadawcy
-				+ ", adresOdbiorcy=" + adresOdbiorcy + "]";
+		return "Paczka [id=" + id + ", AIDKlienta=" + AIDKlienta
+				+ ", adresNadawcy=" + adresNadawcy + ", adresOdbiorcy="
+				+ adresOdbiorcy + "]";
 	}
 
-	
+	public String getAIDKlienta() {
+		return AIDKlienta;
+	}
+	public void setAIDKlienta(String aIDKlienta) {
+		AIDKlienta = aIDKlienta;
+	}
+
 }

@@ -35,18 +35,26 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 			ServiceDescription sd = new ServiceDescription();
 			sd.setType("Klient");
 			template.addServices(sd);
-			DFAgentDescription[] result;
+			DFAgentDescription[] result = null;
 			AID centralaId = null;
 			
 			try {
 				result = DFService.search(myAgent, template);
-				centralaId = result[0].getName();
+				
 				System.out.println("Znaleziono centrale, wysylam");
 			} catch (FIPAException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
-
+			for(int i=0;i<result.length;i++){
+				if(result[i].getName().equals(packa.getAIDKlienta()))
+					centralaId = result[i].getName();
+			}
+			
+		
+			
+			
+			
 			ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 			msg2.addReceiver(centralaId);
 			try {

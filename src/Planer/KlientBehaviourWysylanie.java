@@ -41,7 +41,7 @@ public class KlientBehaviourWysylanie extends TickerBehaviour {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Paczka packToSend =  new Paczka(UUID.randomUUID().toString(),klient.adress,Cities.getRandomCity());
+		Paczka packToSend =  new Paczka(UUID.randomUUID().toString(),klient.getAID().getName(),klient.adress,Cities.getRandomCity());
 		
 
 		ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
