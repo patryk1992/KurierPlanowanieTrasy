@@ -1,7 +1,9 @@
 package Planer;
 
-import shortest_path.Cities;
 import jade.core.Agent;
+import shortest_path.Cities;
+import shortest_path.Dijkstra;
+import shortest_path.Vertex;
 //TODO
 //trzeba dodaæ zablokowanie wysy³¹nia, tak aby najpierw sie rejestrowa³ a potem wysy³a³
 public class Klient extends Agent {
@@ -10,13 +12,9 @@ public class Klient extends Agent {
 	String argumenty;
 	String adress;
 	int nrAgenta;
+	Vertex town;
 
 	protected void setup() {
-
-		
-				
-		
-				
 		readArguments();
 //		registerAgent();
 		DFServiceUtil.registerAgent(this, "Klient");
@@ -28,6 +26,8 @@ public class Klient extends Agent {
 		else{
 		  this.nrAgenta=0;
 		}
+
+		town = Dijkstra.array[nrAgenta];
 		this.adress=Cities.cities[nrAgenta];
 		System.out.println("Numer klienta to: "+this.nrAgenta+", a jego miasto to: "+this.adress);
 		addBehaviours();

@@ -8,15 +8,17 @@ import java.util.PriorityQueue;
 public class Dijkstra {
 	
 	// mark all the vertices
-	public Vertex SZC = new Vertex("SZC");
-	public Vertex WRO = new Vertex("WRO");
-	public Vertex POZ = new Vertex("POZ");
-	public Vertex GDA = new Vertex("GDA");
-	public Vertex WAW = new Vertex("WAW");
-	public Vertex LUB = new Vertex("LUB");
-	public Vertex KRK = new Vertex("KRK");
+	public static Vertex SZC = new Vertex("SZC");
+	public static Vertex WRO = new Vertex("WRO");
+	public static Vertex POZ = new Vertex("POZ");
+	public static Vertex GDA = new Vertex("GDA");
+	public static Vertex WAW = new Vertex("WAW");
+	public static Vertex LUB = new Vertex("LUB");
+	public static Vertex KRK = new Vertex("KRK");
+	
+	public static Vertex[] array = new Vertex[] {SZC, WRO, POZ, GDA, WAW, LUB, KRK};
 
-	public Dijkstra(){
+	static {
 		// set the edges and weight
 		SZC.adjacencies = new Edge[] { new Edge(WRO, 364), new Edge(POZ, 235),
 				new Edge(GDA, 366), new Edge(WAW, 565), new Edge(LUB, 690),
@@ -46,8 +48,15 @@ public class Dijkstra {
 				new Edge(POZ, 424), new Edge(LUB, 270), new Edge(SZC, 662),
 				new Edge(WAW, 293), new Edge(GDA, 603) };
 	}
+	
+	private List<Vertex> compute(Vertex source, Vertex target) {
+		synchronized(SZC) {
+			computePaths(source);
+			return getShortestPathTo(target);
+		}
+	}
 
-	public void computePaths(Vertex source) {
+	private void computePaths(Vertex source) {
 		source.minDistance = 0.;
 		PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>();
 		vertexQueue.add(source);
@@ -72,7 +81,7 @@ public class Dijkstra {
 		}
 	}
 
-	public List<Vertex> getShortestPathTo(Vertex target) {
+	private List<Vertex> getShortestPathTo(Vertex target) {
 		List<Vertex> path = new ArrayList<Vertex>();
 		for (Vertex vertex = target; vertex != null; vertex = vertex.previous)
 			path.add(vertex);

@@ -1,6 +1,7 @@
 package Planer;
 
 import jade.util.leap.Serializable;
+import shortest_path.Vertex;
 
 public class Paczka implements Serializable {
 	
@@ -13,6 +14,7 @@ public class Paczka implements Serializable {
 
 	private String adresNadawcy;
 	private String adresOdbiorcy;
+	private Vertex town;
 	
 	
 	public Paczka(String id,String AIDKlienta, String adresNadawcy, String adresodbiorcy) {
