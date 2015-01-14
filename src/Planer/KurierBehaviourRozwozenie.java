@@ -19,6 +19,7 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 	private static final long serialVersionUID = -7893170015543204040L;
 	
 	Kurier kurier;
+	Vertex old = Dijkstra.POZ;
 	
 	public KurierBehaviourRozwozenie(Agent a, long period) {
 		super(a, period);
@@ -32,10 +33,9 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 		System.out.println("Dostarczono paczke do klienta. Ilosc paczek ktore pozostaly u kuriera: " + kurier.listPackage.size());
 		if(kurier.listPackage.size() > 0) {
 			//tutaj pisz
-			Vertex old = Dijkstra.POZ;
 			shortest_path.Dijkstra dj = new Dijkstra();
 			Paczka shortestPack = kurier.listPackage.get(0);
-			List<Vertex> shortes = dj.compute(Dijkstra.POZ, kurier.listPackage.get(0).getAdresodbiorcy());
+			List<Vertex> shortes = dj.compute(old, kurier.listPackage.get(0).getAdresodbiorcy());
 			for(int i=1; i<kurier.listPackage.size();i++)
 			{
 				List<Vertex> current = dj.compute(old, kurier.listPackage.get(i).getAdresodbiorcy());
@@ -43,6 +43,9 @@ public class KurierBehaviourRozwozenie extends TickerBehaviour {
 					shortestPack = kurier.listPackage.get(i);
 					shortes = current;
 				}
+			}
+			if(kurier.listPackage.size() == 1) {
+				old = Dijkstra.POZ;
 			}
 			
 			System.out.println("kurier wysylanie tick onStart");
